@@ -1,18 +1,24 @@
+#include <SFML/Graphics.hpp>
 #include "tic_tac_toe.hpp"
 
 int main() {
+    // Инициализация окна с SFML
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Tic-Tac-Toe");
+
     TicTacToe game;
     TicTacToeBoard board;
 
-    board.draw(); // Прорисовка игрового поля
-    std::cout << game << std::endl; // Вывод игрового поля
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
 
-    // Пример использования оператора ввода
-    std::cout << "Enter board configuration (9 characters): ";
-    std::cin >> game;
-
-    std::cout << "Updated board: " << std::endl;
-    std::cout << game << std::endl;
+        window.clear();
+        board.draw(window); // Рисуем поле
+        window.display();
+    }
 
     return 0;
 }

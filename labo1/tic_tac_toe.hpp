@@ -1,18 +1,18 @@
 #ifndef TIC_TAC_TOE_HPP
 #define TIC_TAC_TOE_HPP
 
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <memory>
 
 const int SIZE = 3;
 
 // Абстрактный базовый класс для прорисовки
 class Drawable {
 public:
-    virtual void draw() const = 0; // Чисто виртуальная функция
+    virtual void draw(sf::RenderWindow& window) const = 0; // Чисто виртуальная функция для рисования
     virtual ~Drawable() {}
 };
 
@@ -40,10 +40,10 @@ public:
     bool checkWinner(char player) const;
 };
 
-// Класс, который отвечает за прорисовку игрового поля
+// Класс для прорисовки игрового поля
 class TicTacToeBoard : public Drawable {
 public:
-    void draw() const override; // Реализация функции отрисовки
+    void draw(sf::RenderWindow& window) const override;
 };
 
 #endif // TIC_TAC_TOE_HPP

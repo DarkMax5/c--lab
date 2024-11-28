@@ -64,15 +64,12 @@ bool TicTacToe::isFull() const {
 
 // Проверка победителя
 bool TicTacToe::checkWinner(char player) const {
-    // Проверка горизонталей и вертикалей
     for (int i = 0; i < SIZE; ++i) {
         if (std::all_of(board[i].begin(), board[i].end(), [player](char c) { return c == player; }))
             return true;
         if (board[0][i] == player && board[1][i] == player && board[2][i] == player)
             return true;
     }
-
-    // Проверка диагоналей
     if (board[0][0] == player && board[1][1] == player && board[2][2] == player)
         return true;
     if (board[0][2] == player && board[1][1] == player && board[2][0] == player)
@@ -81,7 +78,10 @@ bool TicTacToe::checkWinner(char player) const {
     return false;
 }
 
-// Реализация метода отрисовки для класса TicTacToeBoard
-void TicTacToeBoard::draw() const {
-    std::cout << "Drawing Tic-Tac-Toe board..." << std::endl;
+// Прорисовка игрового поля с использованием SFML
+void TicTacToeBoard::draw(sf::RenderWindow& window) const {
+    // Пример рисования поля (можно расширить)
+    sf::RectangleShape line(sf::Vector2f(100.f, 10.f));
+    line.setFillColor(sf::Color::Black);
+    window.draw(line);
 }
