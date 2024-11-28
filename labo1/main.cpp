@@ -1,42 +1,18 @@
 #include "tic_tac_toe.hpp"
-#include <iostream>
-
-using namespace std;
 
 int main() {
     TicTacToe game;
-    char players[2] = { 'X', 'O' };
-    int turn = 0;
-    int row, col;
+    TicTacToeBoard board;
 
-    while (true) {
-        game.printBoard();
-        char currentPlayer = players[turn % 2];
-        cout << "Ход игрока " << currentPlayer << ": Введите строку и столбец (0, 1 или 2): ";
-        cin >> row >> col;
+    board.draw(); // Прорисовка игрового поля
+    std::cout << game << std::endl; // Вывод игрового поля
 
-        // Совершение хода
-        if (!game.makeMove(row, col, currentPlayer)) {
-            cout << "Некорректный ход. Попробуйте снова." << endl;
-            continue;
-        }
+    // Пример использования оператора ввода
+    std::cout << "Enter board configuration (9 characters): ";
+    std::cin >> game;
 
-        // Проверка на победу
-        if (game.checkWinner(currentPlayer)) {
-            game.printBoard();
-            cout << "Игрок " << currentPlayer << " выиграл!" << endl;
-            break;
-        }
-
-        // Проверка на ничью
-        if (game.isFull()) {
-            game.printBoard();
-            cout << "Ничья!" << endl;
-            break;
-        }
-
-        turn++;
-    }
+    std::cout << "Updated board: " << std::endl;
+    std::cout << game << std::endl;
 
     return 0;
 }

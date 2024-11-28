@@ -2,6 +2,10 @@
 #define TIC_TAC_TOE_HPP
 
 #include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <memory>
 
 const int SIZE = 3;
 
@@ -9,19 +13,19 @@ const int SIZE = 3;
 class Drawable {
 public:
     virtual void draw() const = 0; // Чисто виртуальная функция
-    virtual ~Drawable() {} // Виртуальный деструктор
+    virtual ~Drawable() {}
 };
 
 // Класс игры "Крестики-нолики"
 class TicTacToe {
 private:
-    char board[SIZE][SIZE]; // Игровое поле
+    std::vector<std::vector<char>> board; // Игровое поле
 
 public:
     // Конструкторы
     TicTacToe();
     TicTacToe(const TicTacToe& other);
-    TicTacToe(char initialBoard[SIZE][SIZE]);
+    TicTacToe(std::vector<std::vector<char>> initialBoard);
 
     // Операторы
     TicTacToe& operator=(const TicTacToe& other);
@@ -31,7 +35,9 @@ public:
 
     // Методы
     void initializeBoard();
-    void initializeBoardFrom(char initialBoard[SIZE][SIZE]);
+    void initializeBoardFrom(const std::vector<std::vector<char>>& initialBoard);
+    bool isFull() const;
+    bool checkWinner(char player) const;
 };
 
 // Класс, который отвечает за прорисовку игрового поля
